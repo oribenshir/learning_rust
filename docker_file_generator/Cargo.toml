@@ -1,0 +1,8 @@
+[package]
+name = "dock_gen"
+version = "0.1.0"
+authors = ["oribenshir <oribenshir@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+failure = "0.1.3"
