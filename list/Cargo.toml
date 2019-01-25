@@ -1,0 +1,7 @@
+[package]
+name = "list"
+version = "0.1.0"
+authors = ["oribe"]
+edition = "2018"
+
+[dependencies]
