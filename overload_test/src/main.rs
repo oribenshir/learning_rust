@@ -94,13 +94,13 @@ impl Animal for Bar {
 
 impl Animal for &Bar {
     fn print(self) {
-        println!("In Bar self impl: {}", self.x);
+        println!("In &Bar self impl: {}", self.x);
     }
 }
 
 impl Animal for &mut Bar {
     fn print(self) {
-        println!("In Bar self impl: {}", self.x);
+        println!("In &mut Bar self impl: {}", self.x);
     }
 }
 
