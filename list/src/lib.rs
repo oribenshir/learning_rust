@@ -85,6 +85,13 @@ impl <T> Node<T>
     }
 }
 
+impl<T> Drop for Node<T>
+    where T: Clone + Debug {
+    fn drop(&mut self) {
+        println!("Dropping Node");
+    }
+}
+
 pub struct NodeIterator<T>
     where T: Clone + Debug{
     node : Option<Rc<RefCell<Node<T>>>>,
@@ -188,6 +195,17 @@ impl <T> List<T>
     }
 }
 
+impl<T> Drop for List<T>
+    where T: Clone + Debug {
+    fn drop(&mut self) {
+        while self.head.is_some() {
+            self.remove(Some(self.head().unwrap()));
+        }
+
+        println!("Dropping List");
+    }
+}
+
 impl<T> IntoIterator for List<T>
     where T: Clone + Debug {
     type Item = Rc<RefCell<Node<T>>>;
@@ -195,7 +213,7 @@ impl<T> IntoIterator for List<T>
 
     fn into_iter(self) -> Self::IntoIter {
         NodeIterator {
-            node: self.head
+            node: self.head.clone()
         }
     }
 }
@@ -227,6 +245,7 @@ impl <T> IntoIterator for &mut List<T>
 #[cfg(test)]
 mod tests {
     use crate::*;
+
     #[test]
     fn it_works() {
         let mut list = List::new();
@@ -248,7 +267,7 @@ mod tests {
 
         list.remove(list.tail());
 
-        for value in list {
+        for value in &list {
             println!("{}", value.borrow().value());
         }
 
