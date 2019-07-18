@@ -1,0 +1,8 @@
+[workspace]
+
+members = [
+    "docker_file_generator",
+    "list",
+    "overload_test",
+    "closures_playground"
+]
